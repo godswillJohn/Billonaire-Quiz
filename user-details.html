@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #eeeeee;
+}
+.logo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    background-color: green;
+    color: white;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+input {
+    padding: 15px 70px;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.what{
+    padding-top: 20px;
+}
+
+#start-button {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 8px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    background-color: blue;
+    color: white;
+    outline: none;
+}
+
+#start-button:hover{
+    background-color: rgb(74, 74, 170);
+}
+
+    </style>
+    <div class="main">
+        <div style="text-align: center;">
+        <div class="logo">M</div>
+        <h1 class="what">What is Your Name</h1>
+        <input type="text" placeholder="E.g John Doe" id="user-name"><br><br> 
+        <button id="start-button">Start</button>
+        </div>
+    </div>
+
+    
+    <script>
+        const userName = document.getElementById("user-name");
+        const startButton = document.getElementById("start-button");
+        startButton.addEventListener("click", function() {
+            sessionStorage.setItem("username", userName.value);
+            sessionStorage.setItem("currentquestion", 0);
+            sessionStorage.setItem("score", 0);
+
+            location.assign("quiz.html")
+        });
+
+
+
+        
+        
+    </script>
+</body>
+</html>

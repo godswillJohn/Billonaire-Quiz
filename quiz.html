@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./resources/quiz.css">
+</head>
+<body>
+    <style>
+        section {
+            background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+        }
+    section > span {
+    background-color: grey;
+    width: 400px;
+    height: 320px;
+    border-radius: 20px;
+    text-align: center;
+        }
+    h3 {
+        margin-top: 150px;
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #badCompliment {
+        display: none;
+    }
+    #compliment {
+        display: none;
+    }
+    </style>
+    <section class="section">
+        <span>
+        <h3 id="ending" style="color: whitesmoke;">Time Up, Ending Quiz...</h3>
+    </span>
+    </section>
+    <header>
+
+        <div class="btnGroup">
+            <span class="Btn" id="verifiBtn"></span>
+            <span class="timer">
+              <span id="counter"></span>
+            </span>
+          </div>
+
+
+          <!-- <div id="Timer"></div> -->
+
+
+
+        <div>Who wants to be a billonaire</div>
+        <div class="summary">
+            <!-- <div id="user-name"></div> -->
+            <div>Score: <span id="score"> </span></div><div id="user-name"></div>
+            <div>Question Number <span id="question"></span></div>
+        </div>
+    </header>
+    <div class="questions-container">
+        <div id="questions"></div>
+
+        <div id="options">
+            <div id="option1"></div>
+            <div id="option2"></div>
+            <div id="option3"></div>
+            <div id="option4"></div>
+        </div>
+    </div>
+
+    <div class="modal" style="display: none ;">
+        <div class="modal-container">
+
+        </div>
+    </div>
+<script src="question-bank.js"></script>
+    <script>
+
+// var timeLeft = 30;
+// var elem = document.getElementById('Timer');
+
+// var timerId = setInterval(countdown, 1000);
+
+// function coundown() {
+//   if (timeLeft == 0) {
+//     clearTimeout(timerId);
+//     doSomething();
+//   } else {
+//     elem.innerHTML = timeLeft + ' seconds remaining';
+//     timeLeft--;
+//   }
+// }
+// coundown();
+
+
+function countdown() {
+        var seconds = 61;
+        function tick() {
+          var counter = document.getElementById("counter");
+          seconds--;
+          counter.innerHTML =
+            "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+          if (seconds > 0) {
+            setTimeout(tick, 1000);
+          } else {
+           
+        function endingQuiz() {
+                document.querySelector(".section").style.display = "flex";
+            }
+        endingQuiz()
+        setTimeout(function () {
+               
+               location.assign("show-summary.html")
+           }, 5000);
+            document.getElementById("counter").innerHTML = "";
+          }
+        }
+        tick();
+      }
+      countdown();
+
+        const userName = document.getElementById("user-name");
+        const userScore = document.getElementById("score");
+        const displayQuestionNumber = document.getElementById("question");
+
+        const displayQuestion = document.getElementById("questions");
+
+        const options = document.getElementById("questions")
+        const option1 = document.getElementById("option1");
+        const option2 = document.getElementById("option2");
+        const option3 = document.getElementById("option3");
+        const option4 = document.getElementById("option4");
+        
+
+        const modal = document.querySelector(".modal");
+        const modalContainer = document.querySelector(".modal-container");
+
+        userName.innerText = sessionStorage.getItem("username");
+
+        function showQuestion() {
+            let questionNumber = parseInt(sessionStorage.getItem("currentquestion"));
+            const userQuestion = questions[questionNumber];
+            displayQuestion.innerText = userQuestion.question;
+
+            option1.innerText = "A. " +userQuestion.options.A;
+            option2.innerText = "B. " +userQuestion.options.B;
+            option3.innerText = "C. " +userQuestion.options.C;
+            option4.innerText = "D. " +userQuestion.options.D; 
+
+        userScore.innerText = sessionStorage.getItem("score");
+
+        displayQuestionNumber.innerText = 
+        parseInt(sessionStorage.getItem("currentquestion")) + 1;
+        }
+        showQuestion()
+        
+        function isAnswerCorrect(opt) {
+            const userAnswer = opt.slice(3);
+            const correctAnswer = questions[parseInt(sessionStorage.getItem("currentquestion"))].correctAnswer;
+
+        console.log(userAnswer);
+        console.log(correctAnswer);
+        console.log(userAnswer == correctAnswer);
+
+        if (userAnswer == correctAnswer) {
+            modalContainer.innerHTML = `<img src="./resources/images/correct-tick.jpeg" class="modal-image1">
+            <div class="modal-image-text">Your answer is correct</div>
+            `;
+            const newScore = parseInt (sessionStorage.getItem("score")) + 100;
+            sessionStorage.setItem("score", newScore)
+        } else {
+            modalContainer.innerHTML = `<img src="./resources/images/cross-tick.jpeg" class="modal-image2">
+            <div class="modal-image-text">Your answer is not correct</div>
+            `;
+        }
+        modal.style.display = "flex";
+        setTimeout(function() {
+            const nextQuestion = parseInt(sessionStorage.getItem("currentquestion")) + 1;
+
+
+            if (nextQuestion  == questions.length) {
+               return location.assign("show-summary.html")
+            }  
+            sessionStorage.setItem("currentquestion", nextQuestion);
+            showQuestion();
+            modal.style.display = "none";
+        }, 2000);
+
+        }
+
+        option1.addEventListener("click", function() {
+        const option = option1.innerText;
+        isAnswerCorrect(option);
+        });
+        option2.addEventListener("click", function() {
+            const option = option2.innerText;
+            isAnswerCorrect(option);
+        });
+
+        option3.addEventListener("click", function() {
+            const option = option3.innerText;
+            isAnswerCorrect(option);
+        });
+
+        option4.addEventListener("click", function() {
+            const option = option4.innerText;
+            isAnswerCorrect(option);
+        });
+
+    </script>
+</body>
+</html>

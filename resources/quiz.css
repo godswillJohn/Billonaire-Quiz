@@ -1,0 +1,118 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 50px;
+    border-bottom: 2px solid #eee;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.summary{
+    display: flex;
+    gap: 30px;
+}
+
+.questions-container{
+    display: block;
+    justify-content: center;
+    background-color: #eee;
+    box-sizing: border-box;
+    margin: 0 40px;
+    margin-top: 20px;
+}
+
+#questions{
+    width: 100%;
+    height: 35vh;
+    padding:90px;
+    font-size: 35px;
+    border: solid 2px black;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: black;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#options > div {
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 22px;
+    border: solid 2px black;
+}
+#options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+/* #options:hover {
+    background-color: grey;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+#options > div:hover {
+    background-color: blue;
+    cursor: pointer;
+    color: white;
+}
+.modal {
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+.modal > div{
+    background-color: white;
+    width: 400px;
+    height: 320px;
+    border-radius: 20px;
+}
+.modal-image1 {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 150px;
+}
+.modal-image2 {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 150px;
+}
+.modal-image-text {
+    margin-top: 10px;
+    margin-left: 120px;
+}
+/* #ending {
+    width: 100%;
+    height: 10vh;
+    background-color: red;
+    color: black;
+    display: flex;
+    text-align: center;
+} */
